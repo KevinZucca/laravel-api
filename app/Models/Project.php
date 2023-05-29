@@ -1,0 +1,32 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
+
+class Project extends Model
+{
+    protected $fillable = ['name', 'description', 'github_link', 'languages', 'slug', 'type_id', 'img'];
+    use HasFactory;
+
+    public function type()
+    {
+        return $this->belongsTo(Type::class);
+    }
+
+    public function technologies()
+    {
+        return $this->belongsToMany(Technology::class);
+    }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::saving(function ($project) {
+            $project->slug = Str::slug($project->name, '-');
+        });
+    }
+}

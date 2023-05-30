@@ -4,6 +4,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProjectController;
 use App\Http\Controllers\Admin\TechnologyController;
 use App\Http\Controllers\Admin\TypeController;
+use App\Http\Controllers\Api\ProjectController as ApiProjectController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,6 +23,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('projects', [ApiProjectController::class, 'index']);
 
 
 
